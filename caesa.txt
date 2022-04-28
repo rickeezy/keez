@@ -1,0 +1,73 @@
+Caesar Cipher Module
+
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <iomanip>
+#include <cctype>
+#include <algorithm>
+using namespace std;
+
+
+void Uppa(char*daray, int Lenarray)
+{
+  for(int i=0; i < Lenarray; i++)
+  {
+    if(daray[i] >= 'a' && daray[i] <= 'z')
+      daray[i] -= ' ';
+    else if(ispunct(daray[i]))
+      daray[i] = ' '; 
+  }
+}
+
+int main(){
+  cout << "Enter a key for shift" << endl;
+  string ka;
+  getline(cin, ka);
+  int k = stoi(ka);
+  char messy[1000];
+  cout << "Enter a message" << endl;
+  cin.getline(messy, 1000);
+  Uppa(messy,1000);
+  char qk; 
+  string mess = "";
+  for (int i=0; messy[i] != '\0'; i++)
+    {
+      qk = messy[i];
+      if (qk >= 'A' && qk <= 'Z')
+      {
+        qk = qk + k;
+        if (qk > 'Z'){
+          qk = qk - 'Z' + 'A' - 1;
+        }
+        messy[i] = qk;
+      }
+      if (qk != ' ')
+      {
+        mess = mess + messy[i];
+      }
+    }
+//cout << "Encrypyed: " << mess << endl;
+int ct = 0;
+int nd = 0;
+for (int k=0; k<mess.size(); k++)
+{
+  cout << mess[k];
+  ct += 1;
+  if (ct == 5)
+  {
+    cout << " ";
+    ct = 0;
+    nd += 1;
+  }
+  if (nd == 10)
+  {
+    cout << endl;
+    nd = 0;
+  }
+}
+cout << endl;
+
+return 0;
+}
+
